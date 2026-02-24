@@ -1,0 +1,12 @@
+# OSM data (large files, downloaded by setup.sh)
+regions/
+*.osm.pbf
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
