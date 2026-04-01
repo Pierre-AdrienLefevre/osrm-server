@@ -7,9 +7,11 @@
 #
 # Data structure:
 #   regions/
-#     canada/    -> canada-latest.osrm + associated files
-#     quebec/    -> quebec-latest.osrm + associated files
-#     usa/       -> usa-latest.osrm + associated files
+#     canada/      -> canada-latest.osrm + associated files
+#     quebec/      -> quebec-latest.osrm + associated files
+#     usa/         -> usa-latest.osrm + associated files
+#     netherlands/ -> netherlands-latest.osrm + associated files
+#     australia/   -> australia-latest.osrm + associated files
 #
 # Usage:
 #   1. Initial setup (once per region):
@@ -37,6 +39,52 @@ services:
       - "5001:5000"
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/-73.5,45.5;-73.6,45.6?overview=false' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  # ===========================================================================
+  # Netherlands - Port 5004
+  # ===========================================================================
+  osrm-netherlands:
+    image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+    container_name: osrm-netherlands
+    command: osrm-routed --algorithm mld --max-table-size 5000 /data/netherlands-latest.osrm
+    volumes:
+      - ./regions/netherlands:/data:ro
+    ports:
+      - "5004:5000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/4.8945,52.3667;5.1214,52.0907?overview=false' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  # ===========================================================================
+  # Australia - Port 5005
+  # ===========================================================================
+  osrm-australia:
+    image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+    container_name: osrm-australia
+    command: osrm-routed --algorithm mld --max-table-size 5000 /data/australia-latest.osrm
+    volumes:
+      - ./regions/australia:/data:ro
+    ports:
+      - "5005:5000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/151.2093,-33.8688;144.9631,-37.8136?overview=false' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5

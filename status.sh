@@ -18,13 +18,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
-ALL_REGIONS="canada quebec usa"
+ALL_REGIONS="canada quebec usa netherlands australia"
 get_region_port() {
     case "$1" in
-        canada) echo 5001 ;;
-        quebec) echo 5002 ;;
-        usa)    echo 5003 ;;
-        *)      echo "" ;;
+        canada)      echo 5001 ;;
+        quebec)      echo 5002 ;;
+        usa)         echo 5003 ;;
+        netherlands) echo 5004 ;;
+        australia)   echo 5005 ;;
+        *)           echo "" ;;
     esac
 }
 
