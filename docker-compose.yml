@@ -47,7 +47,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 4G
+          memory: 3.5G
 
   # ===========================================================================
   # Netherlands - Port 5004
@@ -70,30 +70,30 @@ services:
     deploy:
       resources:
         limits:
-          memory: 4G
+          memory: 1.5G
 
   # ===========================================================================
-  # Australia - Port 5005
+  # Australia - Port 5005 (uncomment to enable)
   # ===========================================================================
-  osrm-australia:
-    image: ghcr.io/project-osrm/osrm-backend:v6.0.0
-    container_name: osrm-australia
-    command: osrm-routed --algorithm mld --max-table-size 5000 /data/australia-latest.osrm
-    volumes:
-      - ./regions/australia:/data:ro
-    ports:
-      - "5005:5000"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/151.2093,-33.8688;144.9631,-37.8136?overview=false' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 4G
+  # osrm-australia:
+  #   image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+  #   container_name: osrm-australia
+  #   command: osrm-routed --algorithm mld --max-table-size 5000 /data/australia-latest.osrm
+  #   volumes:
+  #     - ./regions/australia:/data:ro
+  #   ports:
+  #     - "5005:5000"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/151.2093,-33.8688;144.9631,-37.8136?overview=false' || exit 1"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 30s
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 4G
 
   # ===========================================================================
   # Quebec - Port 5002 (uncomment to enable)
