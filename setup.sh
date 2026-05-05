@@ -26,7 +26,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-OSRM_IMAGE="ghcr.io/project-osrm/osrm-backend:v6.0.0"
+OSRM_IMAGE="ghcr.io/project-osrm/osrm-backend:v26.4"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REGIONS_DIR="$SCRIPT_DIR/regions"
 

@@ -30,7 +30,7 @@ services:
   # Canada - Port 5001
   # ===========================================================================
   osrm-canada:
-    image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+    image: ghcr.io/project-osrm/osrm-backend:v26.4
     container_name: osrm-canada
     command: osrm-routed --algorithm mld --max-table-size 5000 /data/canada-latest.osrm
     volumes:
@@ -53,7 +53,7 @@ services:
   # Netherlands - Port 5004
   # ===========================================================================
   osrm-netherlands:
-    image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+    image: ghcr.io/project-osrm/osrm-backend:v26.4
     container_name: osrm-netherlands
     command: osrm-routed --algorithm mld --max-table-size 5000 /data/netherlands-latest.osrm
     volumes:
@@ -76,7 +76,7 @@ services:
   # Australia - Port 5005 (uncomment to enable)
   # ===========================================================================
   # osrm-australia:
-  #   image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+  #   image: ghcr.io/project-osrm/osrm-backend:v26.4
   #   container_name: osrm-australia
   #   command: osrm-routed --algorithm mld --max-table-size 5000 /data/australia-latest.osrm
   #   volumes:
@@ -99,7 +99,7 @@ services:
   # Quebec - Port 5002 (uncomment to enable)
   # ===========================================================================
   # osrm-quebec:
-  #   image: ghcr.io/project-osrm/osrm-backend:v6.0.0
+  #   image: ghcr.io/project-osrm/osrm-backend:v26.4
   #   container_name: osrm-quebec
   #   command: osrm-routed --algorithm mld --max-table-size 5000 /data/quebec-latest.osrm
   #   volumes:
