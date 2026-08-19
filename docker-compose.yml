@@ -12,6 +12,7 @@
 #     usa/         -> usa-latest.osrm + associated files
 #     netherlands/ -> netherlands-latest.osrm + associated files
 #     australia/   -> australia-latest.osrm + associated files
+#     italy/       -> italy-latest.osrm + associated files
 #
 # Usage:
 #   1. Initial setup (once per region):
@@ -71,6 +72,29 @@ services:
       resources:
         limits:
           memory: 1.5G
+
+  # ===========================================================================
+  # Italy - Port 5006
+  # ===========================================================================
+  osrm-italy:
+    image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+    container_name: osrm-italy
+    command: osrm-routed --algorithm mld --max-table-size 5000 /data/italy-latest.osrm
+    volumes:
+      - ./regions/italy:/data:ro
+    ports:
+      - "5006:5000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider 'http://127.0.0.1:5000/route/v1/driving/12.4964,41.9028;9.1900,45.4642?overview=false' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2.5G
 
   # ===========================================================================
   # Australia - Port 5005 (uncomment to enable)

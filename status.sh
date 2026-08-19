@@ -18,7 +18,7 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
-ALL_REGIONS="canada quebec usa netherlands australia"
+ALL_REGIONS="canada quebec usa netherlands australia italy"
 get_region_port() {
     case "$1" in
         canada)      echo 5001 ;;
@@ -26,6 +26,7 @@ get_region_port() {
         usa)         echo 5003 ;;
         netherlands) echo 5004 ;;
         australia)   echo 5005 ;;
+        italy)       echo 5006 ;;
         *)           echo "" ;;
     esac
 }

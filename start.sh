@@ -21,13 +21,14 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # Region ports (must match docker-compose.yml)
-ALL_REGIONS="canada quebec netherlands australia"
+ALL_REGIONS="canada quebec netherlands australia italy"
 get_region_port() {
     case "$1" in
         canada)      echo 5001 ;;
         quebec)      echo 5002 ;;
         netherlands) echo 5004 ;;
         australia)   echo 5005 ;;
+        italy)       echo 5006 ;;
         *)           echo "" ;;
     esac
 }

@@ -15,6 +15,7 @@
 #   usa          -> https://download.geofabrik.de/north-america/us-latest.osm.pbf
 #   netherlands  -> https://download.geofabrik.de/europe/netherlands-latest.osm.pbf
 #   australia    -> https://download.geofabrik.de/australia-oceania/australia-latest.osm.pbf
+#   italy        -> https://download.geofabrik.de/europe/italy-latest.osm.pbf
 #
 # =============================================================================
 
@@ -38,6 +39,7 @@ get_region_url() {
         usa)         echo "https://download.geofabrik.de/north-america/us-latest.osm.pbf" ;;
         netherlands) echo "https://download.geofabrik.de/europe/netherlands-latest.osm.pbf" ;;
         australia)   echo "https://download.geofabrik.de/australia-oceania/australia-latest.osm.pbf" ;;
+        italy)       echo "https://download.geofabrik.de/europe/italy-latest.osm.pbf" ;;
         *)           echo "" ;;
     esac
 }
@@ -47,7 +49,7 @@ get_region_url() {
 # =============================================================================
 if [ -z "$1" ]; then
     echo -e "${RED}Usage: ./setup.sh <region>${NC}"
-    echo -e "Available regions: ${GREEN}canada${NC}, ${GREEN}quebec${NC}, ${GREEN}usa${NC}, ${GREEN}netherlands${NC}, ${GREEN}australia${NC}"
+    echo -e "Available regions: ${GREEN}canada${NC}, ${GREEN}quebec${NC}, ${GREEN}usa${NC}, ${GREEN}netherlands${NC}, ${GREEN}australia${NC}, ${GREEN}italy${NC}"
     echo -e "Or provide a custom URL: ${YELLOW}./setup.sh my-region https://url/to/file.osm.pbf${NC}"
     exit 1
 fi

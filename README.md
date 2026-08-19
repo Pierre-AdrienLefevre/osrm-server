@@ -12,7 +12,7 @@ Calculez des itineraires, des matrices de distances et trouvez les points les pl
 
 ## Features / Fonctionnalites
 
-- **Multi-region**: Canada, Quebec, USA or any Geofabrik region
+- **Multi-region**: Canada, Quebec, USA, Netherlands, Australia, Italy or any Geofabrik region
 - **Docker**: No local installation required, everything runs in containers
 - **Automated scripts**: setup, start, stop, status in one command
 - **Custom regions**: Add any region with a Geofabrik URL
@@ -46,6 +46,9 @@ The server is available at `http://localhost:5001`.
 | Canada | `./setup.sh canada` | 5001 | [Geofabrik](https://download.geofabrik.de/north-america/canada-latest.osm.pbf) |
 | Quebec | `./setup.sh quebec` | 5002 | [Geofabrik](https://download.geofabrik.de/north-america/canada/quebec-latest.osm.pbf) |
 | USA | `./setup.sh usa` | 5003 | [Geofabrik](https://download.geofabrik.de/north-america/us-latest.osm.pbf) |
+| Netherlands | `./setup.sh netherlands` | 5004 | [Geofabrik](https://download.geofabrik.de/europe/netherlands-latest.osm.pbf) |
+| Australia | `./setup.sh australia` | 5005 | [Geofabrik](https://download.geofabrik.de/australia-oceania/australia-latest.osm.pbf) |
+| Italy | `./setup.sh italy` | 5006 | [Geofabrik](https://download.geofabrik.de/europe/italy-latest.osm.pbf) |
 
 ### Add a custom region / Ajouter une region custom
 
