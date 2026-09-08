@@ -10,3 +10,11 @@ regions/
 
 # Logs
 *.log
+
+# Backend selection and local Lua profiles (configure.sh)
+.osrm-backend
+.docker-ram-saved
+profiles/
+
+# Locally generated OSRM data (never versioned)
+data-prod-ca/

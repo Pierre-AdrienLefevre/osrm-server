@@ -7,16 +7,18 @@
 #
 # Data structure:
 #   regions/
-#     canada/      -> canada-latest.osrm + associated files
-#     quebec/      -> quebec-latest.osrm + associated files
-#     usa/         -> usa-latest.osrm + associated files
-#     netherlands/ -> netherlands-latest.osrm + associated files
-#     australia/   -> australia-latest.osrm + associated files
-#     italy/       -> italy-latest.osrm + associated files
+#     canada/
+#       canada-latest.osm.pbf   <- shared source
+#       ch/                     <- osrm files for the CH algorithm (mounted here)
+#       mld/                    <- osrm files for MLD, if ever prepared
+#     quebec/, usa/, netherlands/, australia/, italy/  -> same layout
+#
+# CH and MLD share no generated file, so each algorithm gets its own directory.
+# Switch a service to MLD by mounting .../mld and passing --algorithm mld.
 #
 # Usage:
 #   1. Initial setup (once per region):
-#      ./setup.sh canada
+#      ./setup.sh canada        (CH; './setup.sh canada mld' for MLD)
 #
 #   2. Start the servers:
 #      docker compose up -d
@@ -31,11 +33,11 @@ services:
   # Canada - Port 5001
   # ===========================================================================
   osrm-canada:
-    image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+    image: ghcr.io/project-osrm/osrm-backend:v26.9.0-arm64-debian
     container_name: osrm-canada
-    command: osrm-routed --algorithm mld --max-table-size 5000 /data/canada-latest.osrm
+    command: osrm-routed --algorithm ch --max-table-size 5000 /data/canada-latest.osrm
     volumes:
-      - ./regions/canada:/data:ro
+      - ./regions/canada/ch:/data:ro
     ports:
       - "5001:5000"
     healthcheck:
@@ -54,11 +56,11 @@ services:
   # Netherlands - Port 5004
   # ===========================================================================
   osrm-netherlands:
-    image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+    image: ghcr.io/project-osrm/osrm-backend:v26.9.0-arm64-debian
     container_name: osrm-netherlands
-    command: osrm-routed --algorithm mld --max-table-size 5000 /data/netherlands-latest.osrm
+    command: osrm-routed --algorithm ch --max-table-size 5000 /data/netherlands-latest.osrm
     volumes:
-      - ./regions/netherlands:/data:ro
+      - ./regions/netherlands/ch:/data:ro
     ports:
       - "5004:5000"
     healthcheck:
@@ -77,11 +79,11 @@ services:
   # Italy - Port 5006
   # ===========================================================================
   osrm-italy:
-    image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+    image: ghcr.io/project-osrm/osrm-backend:v26.9.0-arm64-debian
     container_name: osrm-italy
-    command: osrm-routed --algorithm mld --max-table-size 5000 /data/italy-latest.osrm
+    command: osrm-routed --algorithm ch --max-table-size 5000 /data/italy-latest.osrm
     volumes:
-      - ./regions/italy:/data:ro
+      - ./regions/italy/ch:/data:ro
     ports:
       - "5006:5000"
     healthcheck:
@@ -100,11 +102,11 @@ services:
   # Australia - Port 5005 (uncomment to enable)
   # ===========================================================================
   # osrm-australia:
-  #   image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+  #   image: ghcr.io/project-osrm/osrm-backend:v26.9.0-arm64-debian
   #   container_name: osrm-australia
-  #   command: osrm-routed --algorithm mld --max-table-size 5000 /data/australia-latest.osrm
+  #   command: osrm-routed --algorithm ch --max-table-size 5000 /data/australia-latest.osrm
   #   volumes:
-  #     - ./regions/australia:/data:ro
+  #     - ./regions/australia/ch:/data:ro
   #   ports:
   #     - "5005:5000"
   #   healthcheck:
@@ -123,11 +125,11 @@ services:
   # Quebec - Port 5002 (uncomment to enable)
   # ===========================================================================
   # osrm-quebec:
-  #   image: ghcr.io/project-osrm/osrm-backend:v26.7.2-arm64-debian
+  #   image: ghcr.io/project-osrm/osrm-backend:v26.9.0-arm64-debian
   #   container_name: osrm-quebec
-  #   command: osrm-routed --algorithm mld --max-table-size 5000 /data/quebec-latest.osrm
+  #   command: osrm-routed --algorithm ch --max-table-size 5000 /data/quebec-latest.osrm
   #   volumes:
-  #     - ./regions/quebec:/data:ro
+  #     - ./regions/quebec/ch:/data:ro
   #   ports:
   #     - "5002:5000"
   #   healthcheck:

@@ -73,7 +73,8 @@ for region in $ALL_REGIONS; do
         active=$((active + 1))
     else
         # Check if data exists
-        if [ -d "$SCRIPT_DIR/regions/$region" ] && [ -f "$SCRIPT_DIR/regions/$region/${region}-latest.osrm" ]; then
+        # OSRM never writes a bare .osrm file, only .osrm.* -- look for the set.
+        if compgen -G "$SCRIPT_DIR/regions/$region/ch/${region}-latest.osrm.*" > /dev/null 2>&1; then
             echo -e "${YELLOW}STOPPED${NC} (data present, ready to start)"
         else
             echo -e "${RED}NOT CONFIGURED${NC} (run: ./setup.sh $region)"
